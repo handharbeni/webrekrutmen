@@ -1,0 +1,257 @@
+.agile_team_grid1 .desc{
+	color : #212121;
+}
+/*--login--*/
+.contact-grids input[type="password"] {
+    border: none;
+    width: 100%;
+    margin: 0 0 1em 0;
+    outline: none;
+    font-size: 1em;
+    color: #000;
+    padding: 10px 12px;
+    -webkit-appearance: none;
+     background-color: rgba(209, 210, 219, 0.37);
+}
+.login {
+    padding: 5em 0 0;
+}
+.login h3 {
+    font-size: 2.5em;
+    color:rgb(4, 19, 102);
+    margin-bottom: 0.8em;
+    text-align: center;
+}
+.login-grids iframe {
+    border: none;
+    width: 100%;
+    height: 400px;
+}
+.login-grids input[type="text"] {
+    border: none;
+    width: 100%;
+    margin: 0 0 1em 0;
+    outline: none;
+    font-size: 1em;
+    color: #000;
+    padding: 10px 12px;
+    -webkit-appearance: none;
+     background-color: rgba(209, 210, 219, 0.37);
+}
+.login-grids textarea {
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #000;
+    padding: 10px 12px;
+    width: 100%;
+    resize: none;
+    height: 13em;
+    -webkit-appearance: none;
+	    background-color: rgba(209, 210, 219, 0.37);
+}
+.login-grids input[type="submit"] {
+    border: 1px solid #0c1443;
+    padding: .5em 0;
+    width: 25%;
+    margin-top: 0.8em;
+    font-size: 1.1em;
+    color: #fff;
+    letter-spacing: 1px;
+    outline: none;
+    background-color: #0c1443;
+    transition: 0.5s all ease;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    -webkit-appearance: none;
+}
+.login-grids .form-group{
+	width: 100%;
+	float: none;
+}
+.login-grids .help-block{
+	color: #f00;
+}
+.login-grids input[type="submit"]:hover {
+    border: 1px solid #fea500;
+    color: #fff;
+    background-color:#fea500;
+}
+.login-grids ul{
+    margin-top: 2em;
+}
+.login-grids ul li {
+    display: block;
+    color:  #757575;
+    font-size: 0.95em;
+    margin-top: 1.1em;
+}
+.login-grids ul li a {
+	color: #757575;
+	font-size: 0.95em;
+}
+.login-grids ul li a:hover{
+	    color: #0c1443;
+}
+.login-grids p {
+    font-size: 0.95em;
+    color: #757575;
+    line-height: 2em;
+    width: 80%;
+}
+.login-grids span.glyphicon {
+    font-size: 1em;
+    margin-right: 0.5em;
+}
+.login-info{
+	margin-bottom:5em
+}
+/*--//login--*/
+
+.login-info .login-grids {
+	float : none;
+	margin-left : auto;
+	margin-right: auto;
+}
+.login-grids .form-inline{
+	margin-bottom: 20px;
+	display: block;
+	height: 35px;
+}
+.ab-top .list-group {
+	margin-bottom : 0;
+}
+.ab-top .list-group-item {
+	color : #fff;
+	background : transparent;
+}
+.ab-top .list-group button{
+	width : 100%;
+	text-align : left;
+	border : none;
+	border-bottom : 1px solid #ddd;
+}
+.ab-lft .col-md-6{
+	padding-left: 0;
+	padding-right: 0;
+}
+.ab-lft .company{
+	color: #333;
+	margin-top : 0px;
+	padding-left : 0px;
+}
+.ab-lft .job-desc{
+	margin-top: 0;
+	color: #333;
+	font-family: 'Roboto', sans-serif;
+}
+.ab-lft .btn{
+	border: 1px solid #0c1443;
+    padding: .5em 0;
+    width: 25%;
+    margin-top: 0.8em;
+    font-size: 12px;
+    color: #fff;
+    letter-spacing: 1px;
+    outline: none;
+    background-color: #0c1443;
+    transition: 0.5s all ease;
+    -webkit-transition: 0.5s all ease;
+    -moz-transition: 0.5s all ease;
+    -o-transition: 0.5s all ease;
+    -ms-transition: 0.5s all ease;
+    -webkit-appearance: none;
+}
+.login-grids input[type="password"]{
+	border: none;
+	width: 100%;
+	margin: 0 0 1em 0;
+	outline: none;
+	font-size: 1em;
+	color: #000;
+	padding: 10px 12px;
+	-webkit-appearance: none;
+	background-color: rgba(209, 210, 219, 0.37);
+	
+}
+.banner{
+	padding-left : 200px;
+}
+.input-group .form-control:last-child{
+	border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.banner .form-group{
+	width: auto;
+	padding-right: 10px;
+}
+.banner h1, .banner .small{
+	padding-top: 200px;
+	text-align: left;
+	color: #FFF;
+}
+.banner input.form-control{
+	background: white;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	color: #aaa;
+}
+.header-right{
+	text-align: right;
+	font-family: 'Raleway', sans-serif;
+	color : #FFF;
+}
+.header-right .label{
+	font-size: 14px;
+	line-height: 1.42857143;
+}
+.menu{
+	float: none;
+	display: inline-block;
+	vertical-align: top;
+}
+.form-group{
+	width: 100%;
+}
+
+input.form-control, input.form-control:focus{
+	display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.form-inline input.form-control, .form-inline input.form-control:focus{
+	display: inline;
+	width: auto;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]:focus::-webkit-inner-spin-button,
+input[type=number]:focus::-webkit-outer-spin-button,
+input[type=number]:hover::-webkit-inner-spin-button,
+input[type=number]:hover::-webkit-outer-spin-button  {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number],input[type=number]:hover, input[type=number]:focus {
+    -moz-appearance:textfield;
+    -webkit-appearance: none;
+    margin: 0;
+}
