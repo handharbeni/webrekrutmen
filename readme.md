@@ -27,8 +27,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Clone Repository to your working folder
-$ git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY
+$ git clone https://github.com/handharbeni/webrekrutmen.git
 ## Configuring with composer
-$ compose update
-$ php artisan migrate
-$ php artisan db:seed
+$ compose update <br>
+$ php artisan migrate <br>
+$ php artisan db:seed <br>
