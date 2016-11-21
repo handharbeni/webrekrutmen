@@ -3,16 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Candidate;
+use App\CandidateHistory;
 use App\Skill;
 use App\Level;
+use App\Religion;
+use App\MarriageStatus;
 use App\City;
-use App\Province;
 use App\Company;
 use App\Propinsi;
 use App\Kota;
 use App\Kecamatan;
-use App\Desa;
-	
+use App\School;
+use App\Major;
+use App\Position;
+
 class ProfileController extends Controller
 {
     /**
@@ -32,16 +39,62 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $propinsi = Propinsi::all();
-		$skills	= Skill::all();
-		$levels	= Level::all();
-        return view('profil.index', compact('skills','levels','propinsi'));
+        $propinsi	= Propinsi::all();
+		$skills		= Skill::all();
+		$levels		= Level::all();
+		$statuses	= MarriageStatus::all();
+		$religions	= Religion::all();
+		$schools	= School::all();
+		$companies	= Company::all();
+		$majors		= Major::all();
+		$positions	= Position::all();
+		$profil		= DB::table('candidates')->where('user_id',Auth::user()->id)->first();
+		$history	= DB::table('candidate_histories')->where('candidate_id',Auth::user()->id)->first();
+		
+		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
     }
 	
-    public function view($id)
-    {
-        return view('profil.profil');
+    public function store(Request $request){
+		$candidate	= Candidate::firstOrNew(array('user_id' => $request->input('user_id')));
+		
+		$candidatefields = array('name', 'alamat', 'email', 'phone', 'ktp', 'npwp',
+											'tanggal_lahir', 'tempat_lahir_city_id', 'tempat_lahir_province_id',
+											'alamat', 'domisili_city_id', 'domisili_province_id', 'pendidikan',
+											'jurusan_id', 'tahun_lulus', 'tinggi_badan', 'berat_badan', 'gender', 'skills',
+											'agama_id', 'marriage_status_id', 'membership_type');
+		
+		foreach($candidatefields as $field){
+			$candidate->$field =  $request->input($field);
+		}
+		$candidate->sekolah_id = $request->input('sekolah_id') == NULL ? 0 : $request->input('sekolah_id');
+		
+		if($request->input('skills') == NULL)
+			$candidate->skills = implode(',',$request->input('skills'));
+		else
+			$candidate->skills = "";
+		
+		/** $candidate->data = $request->only('name', 'alamat', 'email', 'phone', 'ktp', 'npwp',
+											'tanggal_lahir', 'tempat_lahir_city_id', 'tempat_lahir_province_id',
+											'alamat', 'domisili_city_id', 'domisili_province_id', 'pendidikan',
+											'jurusan_id', 'tahun_lulus', 'tinggi_badan', 'berat_badan', 'gender', 'skills',
+											'agama_id', 'marriage_status_id', 'membership_type')
+		*/
+		
+		$candidate->save();
+		
+		/**
+		$history		= CandidateHistory::firstOrNew(array('candidate_id' => $request->input('user_id')));
+		$historyfields	= array('user_id', 'position_id', 'from', 'until');
+		
+		foreach($historyfields as $field){
+			$history->$field = $request->input($field);
+		}
+		
+		$history->save();
+		*/
+		return redirect()->action('ProfileController@index');
     }
+	
     public function getIndex() {
         $propinsi = array('' => '');
         foreach(Propinsi::all() as $row)
@@ -51,19 +104,16 @@ class ProfileController extends Controller
             'propinsi' => $propinsi
         ));
     }
-    public function saveData(){
-
-    }
     public function getData($type, $id) {
         switch($type):
             case 'kabupatens':
-                $return = '<option value="0">PILIH KABUPATEN</option>';
+                $return = '<option value="0">Kabupaten/Kota</option>';
                 foreach(Kota::where('province_id', $id)->get() as $row) 
                     $return .= "<option value='$row->id'>$row->name</option>";
                 return $return;
             break;
             case 'cities':
-                $return = '<option value="0">PILIH KECAMATAN</option>';
+                $return = '<option value="0">Kecamatan</option>';
                 foreach(Kecamatan::where('kabupaten_id', $id)->get() as $row) 
                     $return .= "<option value='$row->id'>$row->name</option>";
                 return $return;

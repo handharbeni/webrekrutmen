@@ -7,217 +7,212 @@
 			<div class="col-md-3 about-left">
 				<div class="ab-top">
 					<div class="list-group">
-						<button type="button" class="list-group-item">Data Pribadi</button>
-						<button type="button" class="list-group-item">Profil 1</button>
-						<button type="button" class="list-group-item">Profil 2</button>
+						<p>Lamaran yang telah diisi dengan profil ini</p>
+						<button type="button" class="list-group-item">Lamaran 1</button>
+						<button type="button" class="list-group-item">Lamaran 2</button>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-9 about-right">
 				<p><em>Syarat dan ketentuan: Isi data dengan sebenar-benarnya dan akan diperiksa saat proses interview.</em></p>
-				<form class="form-horizontal">
+				<form class="form-horizontal" method="post" action="profil">
+					
+					{{ csrf_field() }}
+					<input type="hidden" name="user_id" value="{{Auth::user()->id}}"></input>
+					<input type="hidden" name="membership_type" value="standard_member"></input>
 					<div class="form-group">
-						<label for="nama" class="col-sm-2 control-label">Nama</label>
+						<label for="name" class="col-sm-2 control-label">Nama</label>
 						<div class="col-sm-10">
-							<input type="text" name="nama" class="form-control"></input>
+							<input type="text" name="name" class="form-control" value="{{ $profil->name }}" required></input>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="tempat-lahir" class="col-sm-2 control-label">Tempat Lahir</label>
+						<label for="tempat_lahir_province_id" class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
-							<input type="text" name="tempat-lahir" class="form-control"></input>
+							<div class="form-inline">
+							<select name="tempat_lahir_province_id" class="form-control chosen-propinsi" id="tPropinsi">
+								<option value="0">Propinsi</option>
+								@foreach ($propinsi as $prop)
+									<option value="{{ $prop->id }}" {{ ($profil->tempat_lahir_province_id == $prop->id) ? "selected" : "" }}>{{ $prop->name }}</option>
+								@endforeach
+							</select>
+							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
+								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
+							</select>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="tanggal-lahir" class="col-sm-2 control-label">Tanggal Lahir</label>
+						<label for="tanggal_lahir" class="col-sm-2 control-label">Tanggal Lahir</label>
 						<div class="col-sm-10">
-							<input type="text" name="tanggal-lahir" class="form-control" id="datetimepicker"></input>
-						</div>	
-						<script>
-							$( function() {
-								$( "#datetimepicker" ).datetimepicker({
-									format: 'YYYY-MM-DD'
-								});
-							} );
-						</script>
+							<input type="text" name="tanggal_lahir" class="form-control" id="datetimepicker" value="{{ $profil->tanggal_lahir }}"></input>
+						</div>
 					</div>
 					<div class="form-group">
 						<label for="gender" class="col-sm-2 control-label">Jenis Kelamin</label>
 						<div class="col-sm-10">										
 							<select name="gender" class="form-control">
-								<option value="Pria">Pria</option>
-								<option value="Wanita">Wanita</option>
+								<option value="Pria"{{ ($profil->gender == "Pria") ? "selected" : "" }}>Pria</option>
+								<option value="Wanita"{{ ($profil->gender == "Wanita") ? "selected" : "" }}>Wanita</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="tinggi" class="col-sm-2 control-label">Tinggi Badan</label>
+						<label for="tinggi_badan" class="col-sm-2 control-label">Tinggi Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="tinggi" class="form-control" placeholder="Isi dalam satuan cm"></input>
+							<input type="text" name="tinggi_badan" class="form-control" placeholder="Isi dalam satuan cm" value="{{ ($profil->tinggi_badan == 0) ? '' : $profil->tinggi_badan }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="berat" class="col-sm-2 control-label">Berat Badan</label>
+						<label for="berat_badan" class="col-sm-2 control-label">Berat Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="berat" class="form-control" placeholder="Isi dalam satuan kg"></input>
+							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ ($profil->berat_badan == 0) ? '' : $profil->berat_badan }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="agama" class="col-sm-2 control-label">Agama</label>
-						<div class="col-sm-10">										
-							<select name="agama" class="form-control">
-								<option value="Islam">Islam</option>
-								<option value="Kristen">Kristen</option>
-								<option value="Katolik">Katolik</option>
-								<option value="Hindu">Hindu</option>
-								<option value="Buddha">Buddha</option>
+						<label for="agama_id" class="col-sm-2 control-label">Agama</label>
+						<div class="col-sm-10">							
+							<select name="agama_id" class="form-control">
+							@foreach ($religions as $religion)
+								<option value="{{ $religion->id }}"{{ ($profil->agama_id == $religion->id) ? "selected" : "" }}>{{ $religion->name }}</option>
+							@endforeach
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="status" class="col-sm-2 control-label">Status Pernikahan</label>
+						<label for="marriage_status_id" class="col-sm-2 control-label">Status Pernikahan</label>
 						<div class="col-sm-10">										
-							<select name="status" class="form-control">
-								<option value="Belum Menikah">Belum Menikah</option>
-								<option value="Menikah">Menikah</option>
+							<select name="marriage_status_id" class="form-control">
+							@foreach ($statuses as $status)
+								<option value="{{ $status->id }}"{{ ($profil->marriage_status_id == $status->id) ? "selected" : "" }}>{{ $status->name }}</option>
+							@endforeach
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="alamat" class="col-sm-2 control-label">Domisili</label>
 						<div class="col-sm-10">
-							<textarea name="alamat" class="form-control" width="100%"></textarea>
+							<textarea name="alamat" class="form-control" width="100%">{{ $profil->alamat }}</textarea>
 						</div>
 					</div> 
  					<div class="form-group">
 						<label for="propinsi" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="propinsi" class="form-control chosen-propinsi" id="sPropinsi">
-								<option value="0">PILIH PROPINSI</option>
-								@foreach ($propinsi as $propinsi)
-								    <option value="{{ $propinsi->id }}">{{ $propinsi->name }}</option>
+							<select name="domisili_province_id" class="form-control chosen-propinsi" id="sPropinsi">
+								<option value="0">Propinsi</option>
+								@foreach ($propinsi as $propinsi_item)
+								    <option value="{{ $propinsi_item->id }}"{{ ($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" }}>{{ ($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" }}</option>
 								@endforeach
 							</select>
-<!-- 							<input type="text" name="propinsi" class="form-control" placeholder="Propinsi"></input>
- -->						</div>
+					</div>
 					</div>
  					<div class="form-group">
-						<label for="kota" class="col-sm-2 control-label">&nbsp;</label>
+						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="kota" class="form-control chosen-kabupaten" id="sKota">
-								<option value="0">PILIH KABUPATEN</option>
+							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
+								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
 							</select>
-<!-- 							<input type="text" name="propinsi" class="form-control" placeholder="Propinsi"></input>
- -->						</div>
-					</div>
- 					<div class="form-group">
-						<label for="kecamatan" class="col-sm-2 control-label">&nbsp;</label>
-						<div class="col-sm-10">
-							<select name="kecamatan" class="form-control chosen-kecamatan" id="sKecamatan">
-								<option value="0">PILIH KECAMATAN</option>
-							</select>
-<!-- 							<input type="text" name="propinsi" class="form-control" placeholder="Propinsi"></input>
- -->						</div>
-					</div>
-<!--  					<div class="form-group">
-						<label for="desa" class="col-sm-2 control-label">&nbsp;</label>
-						<div class="col-sm-10">
-							<select name="desa" class="form-control" id="sDesa">
-								<option value="0">PILIH DESA</option>
-							</select>
-							<input type="text" name="desa" class="form-control" placeholder="Propinsi"></input>
-					</div>
-					</div> -->
-<!-- 					<div class="form-group">
-						<label for="kota" class="col-sm-2 control-label">&nbsp;</label>
-						<div class="col-sm-10">
-							<input type="text" name="kota" class="form-control" placeholder="Kota"></input>
 						</div>
-					</div> -->
+					</div>
 					<div class="form-group">
-						<label for="ktp" class="col-sm-2 control-label">No. HP</label>
+						<label for="phone" class="col-sm-2 control-label">No. HP</label>
 						<div class="col-sm-10">
-							<input type="number" name="nohp" class="form-control"></input>
+							<input type="number" name="phone" class="form-control" value="{{ $profil->phone}}"></input>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-2 control-label">Email</label>
+						<div class="col-sm-10">
+							<input type="text" name="email" value="{{ isset($email) ? $email : Auth::user()->email}}" class="form-control"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="ktp" class="col-sm-2 control-label">No. KTP</label>
 						<div class="col-sm-10">
-							<input type="number" name="ktp" class="form-control"></input>
+							<input type="number" name="KTP" class="form-control" value="{{ $profil->KTP}}"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="npwp" class="col-sm-2 control-label">NPWP</label>
 						<div class="col-sm-10">
-							<input type="text" name="npwp" class="form-control"></input>
+							<input type="text" name="npwp" class="form-control" value="{{ $profil->NPWP}}"></input>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="pendidikan" class="col-sm-2 control-label">Pendidikan</label>
+						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
-							<!--select name="sekolah" data-placeholder="Masukkan nama instansi pendidikan..." class="form-control chosen-select" multiple>
-								<option value="SMA">SMA</option>
-								<option value="SMK">SMK</option>
-								<option value="D3">D3</option>
-								<option value="S1">S1</option>
-								<option value="S2">S2</option>
-							</select-->
-							
-							<input type="text" name="pendidikan" class="form-control" placeholder="Nama instansi pendidikan"></input>
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-select form-control">
+								@foreach($schools as $school)
+								<option value="{{$school->id}}">{{$school->name}}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="pendidikan" class="col-sm-2 control-label">&nbsp;</label>
+						<label for="jurusan_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<input type="text" name="jurusan" class="form-control" placeholder="Jurusan"></input>
-							<!--<select name="jurusan" data-placeholder="Jurusan" class="form-control chosen-select" multiple>
-								<option value="SMA">SMA</option>
-								<option value="SMK">SMK</option>
-								<option value="D3">D3</option>
-								<option value="S1">S1</option>
-								<option value="S2">S2</option>
-							</select>-->
+							<select name="jurusan_id" data-placeholder="Jurusan" class="chosen-select form-control">
+								@foreach($majors as $major)
+								<option value="{{$major->id}}">{{$major->name}}</option>
+								@endforeach
+							</select>
 						</div>
 					</div>
 					<div class="form-group">
 					<div class="form-inline">
-						<label for="" class="col-sm-2 control-label">&nbsp</label>
+						<label for="pendidikan" class="col-sm-2 control-label">&nbsp</label>
 						<div class="col-sm-10">
-							<select name="tingkat" class="form-control">
+							<select name="pendidikan" class="form-control">
 								<option value="SMA">SMA</option>
 								<option value="SMK">SMK</option>
 								<option value="D3">D3</option>
 								<option value="S1">S1</option>
 								<option value="S2">S2</option>
 							</select>
-							<input type="text" name="tahun-lulus" class="form-control" placeholder="Tahun Lulus"></input>
-							<input type="number" name="ipk" class="form-control" placeholder="IPK" step="0.01"></input>
+							<input type="text" name="tahun_lulus" class="form-control" placeholder="Tahun Lulus" value="{{ $profil->tahun_lulus }}"></input>
+							<input type="number" name="average_ipk" class="form-control" placeholder="IPK" step="0.01" value="{{ $profil->average_ipk}}"></input>
 						</div>
 					</div>
 					</div>
 					<div class="form-group">
-						<label for="keahlian" class="col-sm-2 control-label">Keahlian</label>
+						<label for="skills" class="col-sm-2 control-label">Keahlian</label>
 						<div class="col-sm-10">
-							<select name="keahlian" data-placeholder="Masukkan keahlian..." class="form-control chosen-select" multiple>
+							<select name="skills[]" data-placeholder="Masukkan keahlian..." class="form-control chosen-skills" multiple>
 								@foreach($skills as $skill)
-								<option value="{{$skill->id}}">{{$skill->name}}</option>
+								<option value="{{$skill->name}}" >{{$skill->name}}</option>
 								@endforeach
 							</select>
 						</div>
 					</div>
-					 Posisi, Tingkat (table levels), Divisi, Perusahaan
+					<h3>Pengalaman Kerja</h3>
 					<div class="form-group">
-						<label for="keahlian" class="col-sm-2 control-label">Pengalaman Kerja</label>
+						<label for="company_id" class="col-sm-2 control-label" id="label-pengalaman">Pekerjaan</label>
+						<div class="col-sm-10">
+							<input type="text" name="position_id" class="form-control" placeholder="Posisi" value="{{ (isset($history->what_he_did)) ? $history->what_he_did : '' }}"></input>
+							<p></p>
+							<select name="company_id" data-placeholder="Instansi/Perusahaan" class="form-control">
+								@foreach($companies as $company)
+								<option value="{{$company->id}}">{{$company->name}}</option>
+								@endforeach
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="level" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
 							<div class="form-inline">
-							<select name="level" data-placeholder="Level" class="form-control chosen-select" multiple>
+							<select name="level" data-placeholder="Level" class="form-control">
 								@foreach($levels as $level)
 								<option value="{{$level->id}}">{{$level->name}}</option>
 								@endforeach
 							</select>
-							<input type="text" name="divisi" class="form-control" placeholder="Divisi"></input>
+							<input type="text" id="tahunmulai" name="from" class="form-control" placeholder="Tahun Mulai" value="{{ (isset($history->from)) ? $history->from : '' }}"></input>
+							<input type="text" id="tahunselesai" name="until" class="form-control" placeholder="Tahun Selesai" value="{{ (isset($history->until)) ? $history->until : '' }}"></input>
 							</div>
 						</div>
+					</div>
+					<div>
+						<input type="submit" value="Simpan" class=" profil-submit">
 					</div>
 				</form>
 			</div>
@@ -235,22 +230,34 @@
 			        $('#sKota').html(e);
 			    });
 			     
-			    $('#sKecamatan').html('<option value="0">PILIH KECAMATAN</option>');
-			    $('#sDesa').html('<option value="0">PILIH DESA</option>');
+			    $('#sKecamatan').html('<option value="0">Kecamatan</option>');
 			     
 			});
-			$('#sKota').on('change', function(){
-			    $.get('{{ URL::to('location/data') }}/cities/'+$('#sKota').val(), function(e){
-			        $('#sKecamatan').html(e);
+			$('#tPropinsi').on('change', function(){				
+			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#tPropinsi').val(), function(e){
+			        $('#tKota').html(e);
 			    });
-			    $('#sDesa').html('<option value="0">PILIH DESA</option>');
-			});		
+			     
+			    //$('#tKecamatan').html('<option value="0">Kecamatan</option>');
+			     
+			});
 			$( function() {
-				 $(".chosen-select").chosen();
-				 $(".chosen-sekolah").chosen({max_selected_options: 1});
-				 $(".chosen-propinsi").chosen({max_selected_options: 1});
-				 // $(".chosen-kabupaten").chosen({max_selected_options: 1});
-				 // $(".chosen-kecamatan").chosen({max_selected_options: 1});
+				$(".chosen-skills").chosen().val();
+				
+				$(".chosen-sekolah").chosen({max_selected_options: 1});
+				
+				//$(".chosen-propinsi").chosen({max_selected_options: 1});
+				// $(".chosen-kabupaten").chosen({max_selected_options: 1});
+				// $(".chosen-kecamatan").chosen({max_selected_options: 1});
+				$( "#datetimepicker" ).datetimepicker({
+					format: 'YYYY-MM-DD'
+				});			
+				$( "#tahunmulai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});			
+				$( "#tahunselesai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});
 			} );
 		</script>
 
