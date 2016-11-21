@@ -30,13 +30,13 @@
 						<label for="tempat_lahir_province_id" class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
 							<div class="form-inline">
-							<select name="tempat_lahir_province_id" class="form-control chosen-propinsi" id="tPropinsi">
+							<select name="tempat_lahir_province_id" class="form-control chosen-select" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
 									<option value="{{ $prop->id }}" {{ ($profil->tempat_lahir_province_id == $prop->id) ? "selected" : "" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
-							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
+							<select name="tempat_lahir_city_id" class="form-control chosen-select" id="tKota">
 								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
 							</select>
 							</div>
@@ -98,7 +98,7 @@
  					<div class="form-group">
 						<label for="propinsi" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="domisili_province_id" class="form-control chosen-propinsi" id="sPropinsi">
+							<select name="domisili_province_id" class="form-control chosen-select" id="sPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $propinsi_item)
 								    <option value="{{ $propinsi_item->id }}"{{ ($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" }}>{{ ($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" }}</option>
@@ -109,7 +109,7 @@
  					<div class="form-group">
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
+							<select name="domisili_city_id" class="form-control chosen-select" id="sKota">
 								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
 							</select>
 						</div>
@@ -141,7 +141,8 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
-							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-select form-control">
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah" id="sekolahId">
+								<option value=""></option>
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -225,6 +226,7 @@
 
 	@parent
 		<script>
+		 
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
 			        $('#sKota').html(e);
@@ -243,12 +245,11 @@
 			});
 			$( function() {
 				$(".chosen-skills").chosen().val();
+				$(".chosen-select").chosen();
+				$(".chosen-sekolah").chosen({no_results_text: "Tambahkan "}); 
+				$('.chosen-sekolah').append('<option>test</option>');
+				$('.chosen-sekolah').trigger('chosen:updated'); 
 				
-				$(".chosen-sekolah").chosen({max_selected_options: 1});
-				
-				//$(".chosen-propinsi").chosen({max_selected_options: 1});
-				// $(".chosen-kabupaten").chosen({max_selected_options: 1});
-				// $(".chosen-kecamatan").chosen({max_selected_options: 1});
 				$( "#datetimepicker" ).datetimepicker({
 					format: 'YYYY-MM-DD'
 				});			

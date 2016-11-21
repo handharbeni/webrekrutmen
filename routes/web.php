@@ -18,10 +18,14 @@ use Illuminate\Http\RedirectResponse;
 	Route::get('/home', 'HomeController@index');
 	
 	Route::get('job', 'JobController@index');
+	Route::get('job/company/{id}', ['as' => 'id', 'uses' => 'JobController@company']);
+	
+	Route::get('perusahaan', 'CompanyController@index');
 	
 	Route::get('location/data/{type}/{id}', 'ProfileController@getData');
+	
 	Route::get('profil', 'ProfileController@index');
-	Route::get('profil/{id}', 'ProfileController@view');
+	Route::post('profil', 'ProfileController@store');
 	
 	Route::get('dashboard', 'DashboardController@index');
 	
