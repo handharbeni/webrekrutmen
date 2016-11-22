@@ -23,7 +23,7 @@
 					<div class="form-group">
 						<label for="name" class="col-sm-2 control-label">Nama</label>
 						<div class="col-sm-10">
-							<input type="text" name="name" class="form-control" value="{{ $profil->name }}" required></input>
+							<input type="text" name="name" class="form-control" value="{{ $profil!=null?$profil->name:"" }}" required></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -33,11 +33,11 @@
 							<select name="tempat_lahir_province_id" class="form-control chosen-propinsi" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
-									<option value="{{ $prop->id }}" {{ ($profil->tempat_lahir_province_id == $prop->id) ? "selected" : "" }}>{{ $prop->name }}</option>
+									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  : "" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
-								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
+								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
 							</select>
 							</div>
 						</div>
@@ -45,28 +45,28 @@
 					<div class="form-group">
 						<label for="tanggal_lahir" class="col-sm-2 control-label">Tanggal Lahir</label>
 						<div class="col-sm-10">
-							<input type="text" name="tanggal_lahir" class="form-control" id="datetimepicker" value="{{ $profil->tanggal_lahir }}"></input>
+							<input type="text" name="tanggal_lahir" class="form-control" id="datetimepicker" value="{{ $profil!=null?$profil->tanggal_lahir:"" }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="gender" class="col-sm-2 control-label">Jenis Kelamin</label>
 						<div class="col-sm-10">										
 							<select name="gender" class="form-control">
-								<option value="Pria"{{ ($profil->gender == "Pria") ? "selected" : "" }}>Pria</option>
-								<option value="Wanita"{{ ($profil->gender == "Wanita") ? "selected" : "" }}>Wanita</option>
+								<option value="Pria"{{ $profil!=null?($profil->gender == "Pria") ? "selected" : "" : "" }}>Pria</option>
+								<option value="Wanita"{{ $profil!=null?($profil->gender == "Wanita") ? "selected" : "" : ""}}>Wanita</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="tinggi_badan" class="col-sm-2 control-label">Tinggi Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="tinggi_badan" class="form-control" placeholder="Isi dalam satuan cm" value="{{ ($profil->tinggi_badan == 0) ? '' : $profil->tinggi_badan }}"></input>
+							<input type="text" name="tinggi_badan" class="form-control" placeholder="Isi dalam satuan cm" value="{{ $profil!=null?($profil->tinggi_badan == 0) ? '' : $profil->tinggi_badan : ""}}"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="berat_badan" class="col-sm-2 control-label">Berat Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ ($profil->berat_badan == 0) ? '' : $profil->berat_badan }}"></input>
+							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ $profil!=null? ($profil->berat_badan == 0) ? '' : $profil->berat_badan : '' }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -74,7 +74,7 @@
 						<div class="col-sm-10">							
 							<select name="agama_id" class="form-control">
 							@foreach ($religions as $religion)
-								<option value="{{ $religion->id }}"{{ ($profil->agama_id == $religion->id) ? "selected" : "" }}>{{ $religion->name }}</option>
+								<option value="{{ $religion->id }}"{{ $profil!=null? ($profil->agama_id == $religion->id) ? "selected" : "" : "" }}>{{ $religion->name }}</option>
 							@endforeach
 							</select>
 						</div>
@@ -84,7 +84,7 @@
 						<div class="col-sm-10">										
 							<select name="marriage_status_id" class="form-control">
 							@foreach ($statuses as $status)
-								<option value="{{ $status->id }}"{{ ($profil->marriage_status_id == $status->id) ? "selected" : "" }}>{{ $status->name }}</option>
+								<option value="{{ $status->id }}"{{ $profil!=null?($profil->marriage_status_id == $status->id) ? "selected" : "" : "" }}>{{ $status->name }}</option>
 							@endforeach
 							</select>
 						</div>
@@ -92,7 +92,7 @@
 					<div class="form-group">
 						<label for="alamat" class="col-sm-2 control-label">Domisili</label>
 						<div class="col-sm-10">
-							<textarea name="alamat" class="form-control" width="100%">{{ $profil->alamat }}</textarea>
+							<textarea name="alamat" class="form-control" width="100%">{{ $profil!=null?$profil->alamat:"" }}</textarea>
 						</div>
 					</div> 
  					<div class="form-group">
@@ -101,7 +101,7 @@
 							<select name="domisili_province_id" class="form-control chosen-propinsi" id="sPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $propinsi_item)
-								    <option value="{{ $propinsi_item->id }}"{{ ($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" }}>{{ ($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" }}</option>
+								    <option value="{{ $propinsi_item->id }}"{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" : "" }}>{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" : $propinsi_item->name}}</option>
 								@endforeach
 							</select>
 					</div>
@@ -110,14 +110,14 @@
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
-								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
+								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="phone" class="col-sm-2 control-label">No. HP</label>
 						<div class="col-sm-10">
-							<input type="number" name="phone" class="form-control" value="{{ $profil->phone}}"></input>
+							<input type="number" name="phone" class="form-control" value="{{ $profil!=null?$profil->phone:"" }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -129,13 +129,13 @@
 					<div class="form-group">
 						<label for="ktp" class="col-sm-2 control-label">No. KTP</label>
 						<div class="col-sm-10">
-							<input type="number" name="KTP" class="form-control" value="{{ $profil->KTP}}"></input>
+							<input type="number" name="KTP" class="form-control" value="{{ $profil!=null?$profil->KTP:"" }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="npwp" class="col-sm-2 control-label">NPWP</label>
 						<div class="col-sm-10">
-							<input type="text" name="npwp" class="form-control" value="{{ $profil->NPWP}}"></input>
+							<input type="text" name="npwp" class="form-control" value="{{ $profil!=null?$profil->NPWP:"" }}"></input>
 						</div>
 					</div>
 					<div class="form-group">
@@ -169,8 +169,8 @@
 								<option value="S1">S1</option>
 								<option value="S2">S2</option>
 							</select>
-							<input type="text" name="tahun_lulus" class="form-control" placeholder="Tahun Lulus" value="{{ $profil->tahun_lulus }}"></input>
-							<input type="number" name="average_ipk" class="form-control" placeholder="IPK" step="0.01" value="{{ $profil->average_ipk}}"></input>
+							<input type="text" name="tahun_lulus" class="form-control" placeholder="Tahun Lulus" value="{{ $profil!=null?$profil->tahun_lulus:"" }}"></input>
+							<input type="number" name="average_ipk" class="form-control" placeholder="IPK" step="0.01" value="{{ $profil!=null?$profil->average_ipk:"" }}"></input>
 						</div>
 					</div>
 					</div>
