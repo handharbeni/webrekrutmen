@@ -41,6 +41,7 @@ class JobController extends Controller
 	  //
 	}
 	
+<<<<<<< HEAD
 	public function search(Request $request){
 		$keyword	= $request->input('keyword');
 		$filter		= $request->input('filter-hari');
@@ -64,6 +65,14 @@ class JobController extends Controller
 		//$companies		= Company::skip(0)->limit(10)->get();
 		$companies		= $this->topcompany();
     	return view('job.index', compact('jobs','companies', 'company_data'));
+=======
+    public function company($id)
+    {
+        $jobs		= JobOpening::where('company_id', $id)
+					  ->orderBy('valid_until', 'desc')->get();
+		$companies	= Company::skip(0)->limit(10)->get();
+    	return view('job.index', compact('jobs','companies'));
+>>>>>>> origin/master
     }
 
 	public function topcompany(){
