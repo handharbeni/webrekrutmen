@@ -10,21 +10,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="js/jquery-1.11.0.min.js"></script>
-<script src="js/moment-with-locales.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootstrap-datetimepicker.js"></script>
-<script src="js/chosen.jquery.js"></script>
+<script src="{{ URL::asset('js/jquery-1.11.0.min.js') }}"></script>
+<script src="{{ URL::asset('js/moment-with-locales.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('js/bootstrap-datetimepicker.js') }}"></script>
+<script src="{{ URL::asset('js/chosen.jquery.js') }}"></script>
 
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
-<link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all">
-<link href="css/bootstrap-chosen.css" rel="stylesheet" type="text/css" media="all">
+<link href="{{ URL::asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css" media="all">
+<link href="{{ URL::asset('css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css" media="all">
+<link href="{{ URL::asset('css/bootstrap-chosen.css') }}" rel="stylesheet" type="text/css" media="all">
 
 <!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
-<link href="css/custom.css" rel="stylesheet" type="text/css" media="all"/>
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ URL::asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ URL::asset('css/custom.css') }}" rel="stylesheet" type="text/css" media="all"/>
+<link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ URL::asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" />
 
 <!-- Custom Theme files -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +56,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<div class="header-main">
 		<div class="header-right">
 				   <div class="logo">
-				   	   <h1><a href="home"><img src="images/metajobslogolandscape_small.png"></a></h1>
+				   	   <h1><a href="home"><img src="{{ URL::asset('images/metajobslogolandscape_small.png') }}"></a></h1>
 				   </div>
 				
 					 <div class="phone">
@@ -100,17 +100,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						@if (Auth::check())
-							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="dashboard">Dashboard</a></li>
-							<li class="hvr-bounce-to-bottom {{ Request::is('profil') ? 'active' : '' }}"><a href="profil">Profil</a></li>
+							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url('dashboard') }}">Dashboard</a></li>
+							<li class="hvr-bounce-to-bottom {{ (Request::is('profil/*') || Request::is('profil')) ? 'active' : '' }}"><a href="{{ url('profil') }}">Profil</a></li>
 						@else
-							<li class="hvr-bounce-to-bottom {{ Request::is('/') ? 'active' : '' }} {{ Request::is('home') ? 'active' : '' }}"><a href="home">Beranda</a></li>
+							<li class="hvr-bounce-to-bottom {{ Request::is('/') ? 'active' : '' }} {{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('home') }}">Beranda</a></li>
 						@endif
 						
-						<li class="hvr-bounce-to-bottom {{ Request::is('job') ? 'active' : '' }}"><a href="job">Lowongan Kerja</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('job/*') || Request::is('job')) ? 'active' : '' }}"><a href="{{ url('job')}}">Lowongan Kerja</a></li>
 						<!-- <li class="hvr-bounce-to-bottom {{ Request::is('industri') ? 'active' : '' }}"><a href="industri">Industri</a></li> -->
-						<li class="hvr-bounce-to-bottom {{ Request::is('perusahaan') ? 'active' : '' }}"><a href="perusahaan">Perusahaan</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('perusahaan/*') || Request::is('perusahaan')) ? 'active' : '' }}"><a href="{{ url('perusahaan') }}">Perusahaan</a></li>
 						<!-- <li class="hvr-bounce-to-bottom {{ Request::is('training') ? 'active' : '' }}"><a href="training">Training</a></li> -->
-						<li class="hvr-bounce-to-bottom {{ Request::is('contact') ? 'active' : '' }}"><a href="contact">Kontak</a></li>
+						<li class="hvr-bounce-to-bottom {{ Request::is('contact') ? 'active' : '' }}"><a href="{{ url('contact') }}">Kontak</a></li>
 					</ul>	
 					
 				</div>	
@@ -171,9 +171,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 @section('custom-script')
 <!--script-->
-	<script src="js/modernizr.custom.97074.js"></script>
-	<script src="js/jquery.chocolat.js"></script>
-	<link rel="stylesheet" href="css/chocolat.css" type="text/css"  media="all">
+	<script src="{{ URL::asset('js/modernizr.custom.97074.js') }}"></script>
+	<script src="{{ URL::asset('js/jquery.chocolat.js') }}"></script>
+	<link rel="stylesheet" href="{{ URL::asset('css/chocolat.css') }}" type="text/css"  media="all">
 <!--script-->
 @show
 </body>

@@ -53,6 +53,25 @@ class ProfileController extends Controller
 		
 		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
     }
+	public function update(){
+		$propinsi	= Propinsi::all();
+		$skills		= Skill::all();
+		$levels		= Level::all();
+		$statuses	= MarriageStatus::all();
+		$religions	= Religion::all();
+		$schools	= School::all();
+		$companies	= Company::all();
+		$majors		= Major::all();
+		$positions	= Position::all();
+		$profil		= DB::table('candidates')->where('user_id',Auth::user()->id)->first();
+		$history	= DB::table('candidate_histories')->where('candidate_id',Auth::user()->id)->first();
+		
+		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
+	}
+	
+	public function view($profileId){
+		
+	}
 	
     public function store(Request $request){
 		$candidate	= Candidate::firstOrNew(array('user_id' => $request->input('user_id')));
@@ -88,7 +107,7 @@ class ProfileController extends Controller
 		
 		foreach($historyfields as $field){
 			$history->$field = $request->input($field);
-		}
+		
 		
 		$history->save();
 		*/
