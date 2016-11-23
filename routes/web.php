@@ -19,10 +19,7 @@ use Illuminate\Http\RedirectResponse;
 	
 	Route::get('job', 'JobController@index');
 	Route::get('job/company/{id}', ['as' => 'id', 'uses' => 'JobController@company']);
-<<<<<<< HEAD
 	Route::get('job/search', ['as' => 'term', 'uses' => 'JobController@search']);
-=======
->>>>>>> origin/master
 	
 	Route::get('perusahaan', 'CompanyController@index');
 	
