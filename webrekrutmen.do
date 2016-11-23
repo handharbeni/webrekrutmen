@@ -10,9 +10,15 @@ Reserved: 5
 
 
 Reserved: 7
+<<<<<<< HEAD
+
+
+Reserved: 10
+=======
 =======
 Reserved: 1
 
 
 Reserved: 6
 >>>>>>> origin/imaniar-rekrutmen
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen

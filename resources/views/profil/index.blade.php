@@ -165,8 +165,12 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
+<<<<<<< HEAD
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah form-control" id="chosen-sekolah">
+=======
 							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah" id="sekolahId">
 								<option value=""></option>
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -249,8 +253,35 @@
 @section('custom-script')
 
 	@parent
+<<<<<<< HEAD
+		<script>	
+			$( function() {
+				$(".chosen-skills").chosen();
+				
+				$(".chosen-sekolah").chosen({
+				    create_option: true,
+				    persistent_create_option: true,
+				    skip_no_results: true
+				});
+				
+				$(".chosen-propinsi").chosen();
+				$(".chosen-kabupaten").chosen();
+				
+				$( "#datetimepicker" ).datetimepicker({
+					format: 'YYYY-MM-DD'
+				});			
+				$( "#tahunmulai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});			
+				$( "#tahunselesai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});
+			} );
+
+=======
 		<script>
 		 
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
 			        $('#sKota').html(e);
@@ -267,6 +298,9 @@
 			    //$('#tKecamatan').html('<option value="0">Kecamatan</option>');
 			     
 			});
+<<<<<<< HEAD
+
+=======
 			$( function() {
 				$(".chosen-skills").chosen().val();
 				$(".chosen-select").chosen();
@@ -284,6 +318,7 @@
 					format: 'YYYY-MM'
 				});
 			} );
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 		</script>
 
 @endsection
