@@ -34,6 +34,7 @@
 							<select name="tempat_lahir_province_id" class="form-control chosen-select" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
+<<<<<<< HEAD
 									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  :"" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
@@ -44,6 +45,13 @@
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
 								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
 >>>>>>> refs/remotes/origin/master
+=======
+									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  : "" }}>{{ $prop->name }}</option>
+								@endforeach
+							</select>
+							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
+								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
+>>>>>>> origin/imaniar-rekrutmen
 							</select>
 							</div>
 						</div>
@@ -116,12 +124,17 @@
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<select name="domisili_city_id" class="form-control chosen-select" id="sKota">
 								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
 =======
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
 >>>>>>> refs/remotes/origin/master
+=======
+							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
+								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
+>>>>>>> origin/imaniar-rekrutmen
 							</select>
 						</div>
 					</div>

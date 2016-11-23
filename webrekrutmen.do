@@ -5,7 +5,14 @@
 http typetodo.com ~nqw3kwivoobo
 
 
+<<<<<<< HEAD
 Reserved: 5
 
 
 Reserved: 7
+=======
+Reserved: 1
+
+
+Reserved: 6
+>>>>>>> origin/imaniar-rekrutmen
