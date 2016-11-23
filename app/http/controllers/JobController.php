@@ -39,9 +39,12 @@ class JobController extends Controller
 	  //
 	}
 	
-    public function company()
+    public function company($id)
     {
-        return $this->belongsTo('App\Models\Companie');
+        $jobs		= JobOpening::where('company_id', $id)
+					  ->orderBy('valid_until', 'desc')->get();
+		$companies	= Company::skip(0)->limit(10)->get();
+    	return view('job.index', compact('jobs','companies'));
     }
 
 }

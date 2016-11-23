@@ -31,14 +31,27 @@
 						<label for="tempat_lahir_province_id" class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
 							<div class="form-inline">
-							<select name="tempat_lahir_province_id" class="form-control chosen-propinsi" id="tPropinsi">
+							<select name="tempat_lahir_province_id" class="form-control chosen-select" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
+<<<<<<< HEAD
 									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  :"" }}>{{ $prop->name }}</option>
+								@endforeach
+							</select>
+<<<<<<< HEAD
+							<select name="tempat_lahir_city_id" class="form-control chosen-select" id="tKota">
+								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
+=======
+							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
+								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
+>>>>>>> refs/remotes/origin/master
+=======
+									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  : "" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
 								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
+>>>>>>> origin/imaniar-rekrutmen
 							</select>
 							</div>
 						</div>
@@ -99,7 +112,7 @@
  					<div class="form-group">
 						<label for="propinsi" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="domisili_province_id" class="form-control chosen-propinsi" id="sPropinsi">
+							<select name="domisili_province_id" class="form-control chosen-select" id="sPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $propinsi_item)
 								    <option value="{{ $propinsi_item->id }}"{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" : "" }}>{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" : $propinsi_item->name}}</option>
@@ -110,8 +123,18 @@
  					<div class="form-group">
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
+<<<<<<< HEAD
+<<<<<<< HEAD
+							<select name="domisili_city_id" class="form-control chosen-select" id="sKota">
+								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
+=======
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
+>>>>>>> refs/remotes/origin/master
+=======
+							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
+								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
+>>>>>>> origin/imaniar-rekrutmen
 							</select>
 						</div>
 					</div>
@@ -142,7 +165,12 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
+<<<<<<< HEAD
 							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah form-control" id="chosen-sekolah">
+=======
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah" id="sekolahId">
+								<option value=""></option>
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -225,6 +253,7 @@
 @section('custom-script')
 
 	@parent
+<<<<<<< HEAD
 		<script>	
 			$( function() {
 				$(".chosen-skills").chosen();
@@ -249,6 +278,10 @@
 				});
 			} );
 
+=======
+		<script>
+		 
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
 			        $('#sKota').html(e);
@@ -265,7 +298,27 @@
 			    //$('#tKecamatan').html('<option value="0">Kecamatan</option>');
 			     
 			});
+<<<<<<< HEAD
 
+=======
+			$( function() {
+				$(".chosen-skills").chosen().val();
+				$(".chosen-select").chosen();
+				$(".chosen-sekolah").chosen({no_results_text: "Tambahkan "}); 
+				$('.chosen-sekolah').append('<option>test</option>');
+				$('.chosen-sekolah').trigger('chosen:updated'); 
+				
+				$( "#datetimepicker" ).datetimepicker({
+					format: 'YYYY-MM-DD'
+				});			
+				$( "#tahunmulai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});			
+				$( "#tahunselesai" ).datetimepicker({
+					format: 'YYYY-MM'
+				});
+			} );
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
 		</script>
 
 @endsection

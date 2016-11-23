@@ -5,6 +5,14 @@
 Homestead.json
 Homestead.yaml
 .env
+<<<<<<< HEAD
 *.do
 *.do
+<<<<<<< HEAD
 *.do
+=======
+=======
+
+webrekrutmen.do
+>>>>>>> origin/imaniar-rekrutmen
+>>>>>>> refs/remotes/origin/imaniar-rekrutmen
