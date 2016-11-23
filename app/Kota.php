@@ -5,5 +5,6 @@ class Kota extends Model {
      
     protected $table = 'kabupatens';
     public $timestamps = false;
+    protected $fillable = ['name'];
          
 }

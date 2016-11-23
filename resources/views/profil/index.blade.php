@@ -110,7 +110,7 @@
  					<div class="form-group">
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
+							<select name="domisili_city_id" class="form-control chosen-kota" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
 							</select>
 						</div>
@@ -142,7 +142,7 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
-							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-select form-control">
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah form-control">
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -228,10 +228,23 @@
 		<script>
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
-			        $('#sKota').html(e);
-			    });
-			     
-			    $('#sKecamatan').html('<option value="0">Kecamatan</option>');
+			        $('#sKota').append(e);
+					$("#sKota").chosen({
+					    create_option: true,
+						create_option_text: 'Add New Kota',
+					    create_option: function(term){
+						    $.get('{{ URL::to('add/kota') }}/'+term, function(e){
+	 					    });
+							this.append_option({
+							value: term,
+							text: term
+							});
+					    },					
+					    persistent_create_option: true,
+					    skip_no_results: true,
+					});
+			    });			     
+			    // $('#sKecamatan').html('<option value="0">Kecamatan</option>');
 			     
 			});
 			$('#tPropinsi').on('change', function(){				
@@ -245,10 +258,38 @@
 			$( function() {
 				$(".chosen-skills").chosen().val();
 				
-				$(".chosen-sekolah").chosen({max_selected_options: 1});
+				$(".chosen-sekolah").chosen({
+				    create_option: true,
+					create_option_text: 'Add New Schools',
+				    create_option: function(term){
+				    	var value = '0';
+					    $.get('{{ URL::to('add/schools') }}/'+term, function(e){
+					    	alert(e);
+					    	value = e;
+ 					    });
+						this.append_option({
+						value: value,
+						text: term
+						});
+				    },					
+				    persistent_create_option: true,
+				    skip_no_results: true,
+				});
 				
-				//$(".chosen-propinsi").chosen({max_selected_options: 1});
-				// $(".chosen-kabupaten").chosen({max_selected_options: 1});
+				$(".chosen-propinsi").chosen({
+				    create_option: true,
+					create_option_text: 'Add New Propinsi',
+				    create_option: function(term){
+					    $.get('{{ URL::to('add/propinsi') }}/'+term, function(e){
+ 					    });
+						this.append_option({
+						value: term,
+						text: term
+						});
+				    },					
+				    persistent_create_option: true,
+				    skip_no_results: true,
+				});
 				// $(".chosen-kecamatan").chosen({max_selected_options: 1});
 				$( "#datetimepicker" ).datetimepicker({
 					format: 'YYYY-MM-DD'

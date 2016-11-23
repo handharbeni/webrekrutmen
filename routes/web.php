@@ -1,17 +1,16 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| This file is where you may define all of the routes that are handled
-| by your application. Just tell Laravel the URIs it should respond
-| to using a Closure or controller method. Build something great!
-|
-*/
-use App\User;
-use Illuminate\Http\RedirectResponse;
+	/*
+	|--------------------------------------------------------------------------
+	| Web Routes
+	|--------------------------------------------------------------------------
+	|
+	| This file is where you may define all of the routes that are handled
+	| by your application. Just tell Laravel the URIs it should respond
+	| to using a Closure or controller method. Build something great!
+	|
+	*/
+	use App\User;
+	use Illuminate\Http\RedirectResponse;
 
 	Route::get('/', 'HomeController@index');
 	
@@ -25,6 +24,10 @@ use Illuminate\Http\RedirectResponse;
 	Route::get('perusahaan', 'CompanyController@index');
 	
 	Route::get('location/data/{type}/{id}', 'ProfileController@getData');
+	
+	Route::get('add/propinsi/{propinsi}', 'PropinsiController@create');
+	Route::get('add/kota/{kota}', 'PropinsiController@create');
+	Route::get('add/schools/{schools}', 'SchoolController@create');
 	
 	Route::get('profil', 'ProfileController@index');
 	Route::post('profil', 'ProfileController@store');

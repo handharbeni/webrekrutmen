@@ -123,6 +123,15 @@ class ProfileController extends Controller
             'propinsi' => $propinsi
         ));
     }
+    public function savePropinsi($propinsi){
+    	$propinsi	= Propinsi::firstOrNew(array('name' => $propinsi));
+    	$propinsi->save();
+    }
+    public function saveKabupaten($kota){
+    	$kota = Kota::firstOrNew(array('name' => $kota));
+    	$kota->save();
+    }
+
     public function getData($type, $id) {
         switch($type):
             case 'kabupatens':

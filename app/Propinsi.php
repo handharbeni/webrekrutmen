@@ -5,5 +5,6 @@ class Propinsi extends Model {
      
     protected $table = 'provinces';
     public $timestamps = false;
+   	protected $fillable = ['name'];
      
 }
