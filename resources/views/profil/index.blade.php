@@ -31,24 +31,14 @@
 						<label for="tempat_lahir_province_id" class="col-sm-2 control-label">Tempat Lahir</label>
 						<div class="col-sm-10">
 							<div class="form-inline">
-							<select name="tempat_lahir_province_id" class="form-control chosen-select" id="tPropinsi">
+							<select name="tempat_lahir_province_id" class="form-control chosen-propinsi" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
-
 									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  :"" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
-
-							<select name="tempat_lahir_city_id" class="form-control chosen-select" id="tKota">
-								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
 								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
-									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  : "" }}>{{ $prop->name }}</option>
-								@endforeach
-							</select>
-							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
-'0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
->>>>>>> origin/imaniar-rekrutmen
 							</select>
 							</div>
 						</div>
@@ -77,8 +67,10 @@
 					<div class="form-group">
 						<label for="berat_badan" class="col-sm-2 control-label">Berat Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ 						</div>
+							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ $profil!=null? ($profil->berat_badan == 0) ? '' : $profil->berat_badan : '' }}"></input>
+						</div>
 					</div>
+					<div class="form-group">
 						<label for="agama_id" class="col-sm-2 control-label">Agama</label>
 						<div class="col-sm-10">							
 							<select name="agama_id" class="form-control">
@@ -107,7 +99,7 @@
  					<div class="form-group">
 						<label for="propinsi" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="domisili_province_id" class="form-control chosen-select" id="sPropinsi">
+							<select name="domisili_province_id" class="form-control chosen-propinsi" id="sPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $propinsi_item)
 								    <option value="{{ $propinsi_item->id }}"{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? "selected" : "" : "" }}>{{ $profil!=null?($profil->domisili_province_id == $propinsi_item->id) ? $propinsi_item->name : "Propinsi" : $propinsi_item->name}}</option>
@@ -118,12 +110,6 @@
  					<div class="form-group">
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-
-
-							<select name="domisili_city_id" class="form-control chosen-select" id="sKota">
-								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
-							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
-								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
 							</select>
@@ -156,10 +142,7 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
-
-							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah form-control" id="chosen-sekolah">
-							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah" id="sekolahId">
-								<option value=""></option>
+							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-select form-control">
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -177,7 +160,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="pendidikndidikan" class="form-control">
+					<div class="form-inline">
+						<label for="pendidikan" class="col-sm-2 control-label">&nbsp</label>
+						<div class="col-sm-10">
+							<select name="pendidikan" class="form-control">
 								<option value="SMA">SMA</option>
 								<option value="SMK">SMK</option>
 								<option value="D3">D3</option>
@@ -191,7 +177,10 @@
 					</div>
 					<div class="form-group">
 						<label for="skills" class="col-sm-2 control-label">Keahlian</label>
-						<div class="col-sm-1e="{{$skill->name}}" >{{$skill->name}}</option>
+						<div class="col-sm-10">
+							<select name="skills[]" data-placeholder="Masukkan keahlian..." class="form-control chosen-skills" multiple>
+								@foreach($skills as $skill)
+								<option value="{{$skill->name}}" >{{$skill->name}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -215,8 +204,9 @@
 							<div class="form-inline">
 							<select name="level" data-placeholder="Level" class="form-control">
 								@foreach($levels as $level)
-								<option valu
-							</select
+								<option value="{{$level->id}}">{{$level->name}}</option>
+								@endforeach
+							</select>
 							<input type="text" id="tahunmulai" name="from" class="form-control" placeholder="Tahun Mulai" value="{{ (isset($history->from)) ? $history->from : '' }}"></input>
 							<input type="text" id="tahunselesai" name="until" class="form-control" placeholder="Tahun Selesai" value="{{ (isset($history->until)) ? $history->until : '' }}"></input>
 							</div>
@@ -235,31 +225,6 @@
 @section('custom-script')
 
 	@parent
-
-		<script>	
-			$( function() {
-				$(".chosen-skills").chosen();
-				
-				$(".chosen-sekolah").chosen({
-				    create_option: true,
-				    persistent_create_option: true,
-				    skip_no_results: true
-				});
-				
-				$(".chosen-propinsi").chosen();
-				$(".chosen-kabupaten").chosen();
-				
-				$( "#datetimepicker" ).datetimepicker({
-					format: 'YYYY-MM-DD'
-				});			
-				$( "#tahunmulai" ).datetimepicker({
-					format: 'YYYY-MM'
-				});			
-				$( "#tahunselesai" ).datetimepicker({
-					format: 'YYYY-MM'
-				});
-			} );
-
 		<script>
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
@@ -279,11 +244,12 @@
 			});
 			$( function() {
 				$(".chosen-skills").chosen().val();
-				$(".chosen-select").chosen();
-				$(".chosen-sekolah").chosen({no_results_text: "Tambahkan "}); 
-				$('.chosen-sekolah').append('<option>test</option>');
-				$('.chosen-sekolah').trigger('chosen:updated'); 
 				
+				$(".chosen-sekolah").chosen({max_selected_options: 1});
+				
+				//$(".chosen-propinsi").chosen({max_selected_options: 1});
+				// $(".chosen-kabupaten").chosen({max_selected_options: 1});
+				// $(".chosen-kecamatan").chosen({max_selected_options: 1});
 				$( "#datetimepicker" ).datetimepicker({
 					format: 'YYYY-MM-DD'
 				});			
@@ -295,4 +261,5 @@
 				});
 			} );
 		</script>
+
 @endsection
