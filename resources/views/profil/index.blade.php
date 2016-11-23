@@ -34,23 +34,20 @@
 							<select name="tempat_lahir_province_id" class="form-control chosen-select" id="tPropinsi">
 								<option value="0">Propinsi</option>
 								@foreach ($propinsi as $prop)
-<<<<<<< HEAD
+
 									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  :"" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
-<<<<<<< HEAD
+
 							<select name="tempat_lahir_city_id" class="form-control chosen-select" id="tKota">
 								<option value="{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0' }}" {{ ($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" }}>{{ ($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' }}</option>
-=======
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
 								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
->>>>>>> refs/remotes/origin/master
-=======
 									<option value="{{ $prop->id }}" {{ $profil!=null?($profil->tempat_lahir_province_id == $prop->id) ? "selected" : ""  : "" }}>{{ $prop->name }}</option>
 								@endforeach
 							</select>
 							<select name="tempat_lahir_city_id" class="form-control chosen-kabupaten" id="tKota">
-								<option value="{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : '0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
+'0':'0' }}" {{ $profil!=null?($profil->tempat_lahir_city_id == $prop->id) ? "selected" : "" : ""}}>{{ $profil!=null?($profil->tempat_lahir_city_id != NULL) ? $profil->tempat_lahir_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota'}}</option>
 >>>>>>> origin/imaniar-rekrutmen
 							</select>
 							</div>
@@ -80,10 +77,8 @@
 					<div class="form-group">
 						<label for="berat_badan" class="col-sm-2 control-label">Berat Badan</label>
 						<div class="col-sm-10">
-							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ $profil!=null? ($profil->berat_badan == 0) ? '' : $profil->berat_badan : '' }}"></input>
-						</div>
+							<input type="text" name="berat_badan" class="form-control" placeholder="Isi dalam satuan kg" value="{{ 						</div>
 					</div>
-					<div class="form-group">
 						<label for="agama_id" class="col-sm-2 control-label">Agama</label>
 						<div class="col-sm-10">							
 							<select name="agama_id" class="form-control">
@@ -123,18 +118,14 @@
  					<div class="form-group">
 						<label for="domisili_city_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 							<select name="domisili_city_id" class="form-control chosen-select" id="sKota">
 								<option value="{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' }}" {{ ($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' }}>{{ ($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' }}</option>
-=======
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
->>>>>>> refs/remotes/origin/master
-=======
 							<select name="domisili_city_id" class="form-control chosen-kabupaten" id="sKota">
 								<option value="{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : '0' : '0' }}" {{ $profil!=null?($profil->domisili_city_id == $propinsi_item->id) ? 'selected' : '' : '' }}>{{ $profil!=null?($profil->domisili_city_id != NULL) ? $profil->domisili_city_id : 'Kabupaten/Kota' : 'Kabupaten/Kota' }}</option>
->>>>>>> origin/imaniar-rekrutmen
 							</select>
 						</div>
 					</div>
@@ -165,12 +156,10 @@
 					<div class="form-group">
 						<label for="sekolah_id" class="col-sm-2 control-label">Pendidikan</label>
 						<div class="col-sm-10">
-<<<<<<< HEAD
+
 							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah form-control" id="chosen-sekolah">
-=======
 							<select name="sekolah_id" data-placeholder="Instansi Pendidikan" class="chosen-sekolah" id="sekolahId">
 								<option value=""></option>
->>>>>>> refs/remotes/origin/imaniar-rekrutmen
 								@foreach($schools as $school)
 								<option value="{{$school->id}}">{{$school->name}}</option>
 								@endforeach
@@ -188,10 +177,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-					<div class="form-inline">
-						<label for="pendidikan" class="col-sm-2 control-label">&nbsp</label>
-						<div class="col-sm-10">
-							<select name="pendidikan" class="form-control">
+						<label for="pendidikndidikan" class="form-control">
 								<option value="SMA">SMA</option>
 								<option value="SMK">SMK</option>
 								<option value="D3">D3</option>
@@ -205,10 +191,7 @@
 					</div>
 					<div class="form-group">
 						<label for="skills" class="col-sm-2 control-label">Keahlian</label>
-						<div class="col-sm-10">
-							<select name="skills[]" data-placeholder="Masukkan keahlian..." class="form-control chosen-skills" multiple>
-								@foreach($skills as $skill)
-								<option value="{{$skill->name}}" >{{$skill->name}}</option>
+						<div class="col-sm-1e="{{$skill->name}}" >{{$skill->name}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -232,9 +215,8 @@
 							<div class="form-inline">
 							<select name="level" data-placeholder="Level" class="form-control">
 								@foreach($levels as $level)
-								<option value="{{$level->id}}">{{$level->name}}</option>
-								@endforeach
-							</select>
+								<option valu
+							</select
 							<input type="text" id="tahunmulai" name="from" class="form-control" placeholder="Tahun Mulai" value="{{ (isset($history->from)) ? $history->from : '' }}"></input>
 							<input type="text" id="tahunselesai" name="until" class="form-control" placeholder="Tahun Selesai" value="{{ (isset($history->until)) ? $history->until : '' }}"></input>
 							</div>
@@ -253,7 +235,7 @@
 @section('custom-script')
 
 	@parent
-<<<<<<< HEAD
+
 		<script>	
 			$( function() {
 				$(".chosen-skills").chosen();
@@ -278,10 +260,7 @@
 				});
 			} );
 
-=======
 		<script>
-		 
->>>>>>> refs/remotes/origin/imaniar-rekrutmen
 			$('#sPropinsi').on('change', function(){				
 			    $.get('{{ URL::to('location/data') }}/kabupatens/'+$('#sPropinsi').val(), function(e){
 			        $('#sKota').html(e);
@@ -298,9 +277,6 @@
 			    //$('#tKecamatan').html('<option value="0">Kecamatan</option>');
 			     
 			});
-<<<<<<< HEAD
-
-=======
 			$( function() {
 				$(".chosen-skills").chosen().val();
 				$(".chosen-select").chosen();
@@ -318,7 +294,5 @@
 					format: 'YYYY-MM'
 				});
 			} );
->>>>>>> refs/remotes/origin/imaniar-rekrutmen
 		</script>
-
 @endsection
