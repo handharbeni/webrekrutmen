@@ -28,6 +28,7 @@ use Illuminate\Http\RedirectResponse;
 	Route::get('add/position/{position}', 'PositionController@create');
 	
 	Route::get('profil', 'ProfileController@index');
+	Route::get('age', 'ProfileController@cobaAge');
 	Route::post('profil', 'ProfileController@store');
 	
 	Route::get('dashboard', 'DashboardController@index');
