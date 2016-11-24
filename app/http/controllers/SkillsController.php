@@ -5,25 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Major;
+use App\Skill;
 
-class JurusanController extends Controller
+class SkillsController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
     public function index(){
-		$jurusan = Major::all();
-		return $jurusan;
+		$skills = Skill::all();
+		return $skills;
     }
     public function getByUser($kd_Kota){
 
     }
     public function create($name){
-    	$jurusan = Major::firstOrNew(array('name' => $name));
-    	$jurusan->save();
-        $return = Major::where('name', $name)->first();
+    	$skills = Skill::firstOrNew(array('name' => $name));
+    	$skills->save();
+        $return = Skill::where('name', $name)->first();
         echo $return->id;        
     }
     public function delete($kd_kota){

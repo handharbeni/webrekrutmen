@@ -26,8 +26,11 @@
 	Route::get('location/data/{type}/{id}', 'ProfileController@getData');
 	
 	Route::get('add/propinsi/{propinsi}', 'PropinsiController@create');
-	Route::get('add/kota/{kota}', 'PropinsiController@create');
+	Route::get('add/kota/{kota}', 'KotaController@create');
 	Route::get('add/schools/{schools}', 'SchoolController@create');
+	Route::get('add/company/{company}', 'CompanyController@create');
+	Route::get('add/skills/{skills}', 'SkillsController@create');
+	Route::get('add/major/{major}', 'JurusanController@create');
 	
 	Route::get('profil', 'ProfileController@index');
 	Route::post('profil', 'ProfileController@store');

@@ -152,7 +152,7 @@
 					<div class="form-group">
 						<label for="jurusan_id" class="col-sm-2 control-label">&nbsp;</label>
 						<div class="col-sm-10">
-							<select name="jurusan_id" data-placeholder="Jurusan" class="chosen-select form-control">
+							<select name="jurusan_id" data-placeholder="Jurusan" class="chosen-jurusan form-control">
 								@foreach($majors as $major)
 								<option value="{{$major->id}}">{{$major->name}}</option>
 								@endforeach
@@ -191,7 +191,7 @@
 						<div class="col-sm-10">
 							<input type="text" name="position_id" class="form-control" placeholder="Posisi" value="{{ (isset($history->what_he_did)) ? $history->what_he_did : '' }}"></input>
 							<p></p>
-							<select name="company_id" data-placeholder="Instansi/Perusahaan" class="form-control">
+							<select name="company_id" data-placeholder="Instansi/Perusahaan" class="chosen-company form-control">
 								@foreach($companies as $company)
 								<option value="{{$company->id}}">{{$company->name}}</option>
 								@endforeach
@@ -236,8 +236,8 @@
 						    $.get('{{ URL::to('add/kota') }}/'+term, function(e){
 	 					    });
 							this.append_option({
-							value: term,
-							text: term
+								value: term,
+								text: term
 							});
 					    },					
 					    persistent_create_option: true,
@@ -256,7 +256,21 @@
 			     
 			});
 			$( function() {
-				$(".chosen-skills").chosen().val();
+				// $(".chosen-skills").chosen().val();
+				$(".chosen-skills").chosen({
+				    create_option: true,
+					create_option_text: 'Add New Skills',
+				    create_option: function(term){
+					    $.get('{{ URL::to('add/skills') }}/'+term, function(e){
+ 					    });
+						this.append_option({
+							value: term,
+							text: term
+						});
+				    },					
+				    persistent_create_option: true,
+				    skip_no_results: true,
+				});
 				
 				$(".chosen-sekolah").chosen({
 				    create_option: true,
@@ -285,6 +299,34 @@
 						this.append_option({
 						value: term,
 						text: term
+						});
+				    },					
+				    persistent_create_option: true,
+				    skip_no_results: true,
+				});
+				$(".chosen-company").chosen({
+				    create_option: true,
+					create_option_text: 'Add New Company',
+				    create_option: function(term){
+					    $.get('{{ URL::to('add/company') }}/'+term, function(e){
+ 					    });
+						this.append_option({
+							value: term,
+							text: term
+						});
+				    },					
+				    persistent_create_option: true,
+				    skip_no_results: true,
+				});
+				$(".chosen-jurusan").chosen({
+				    create_option: true,
+					create_option_text: 'Add New Jurusan',
+				    create_option: function(term){
+					    $.get('{{ URL::to('add/major') }}/'+term, function(e){
+ 					    });
+						this.append_option({
+							value: term,
+							text: term
 						});
 				    },					
 				    persistent_create_option: true,

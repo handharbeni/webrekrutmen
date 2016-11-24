@@ -35,4 +35,16 @@ class CompanyController extends Controller
 		$companies	= Company::all();
     	return view('company.index', compact('companies'));
     }
+    public function create($name){
+        $company = Company::firstOrNew(array('name' => $name));
+        $company->save();
+        $return = Company::where('name', $company)->first();
+        echo $return->id;        
+    }
+    public function delete($kd_kota){
+
+    }
+    public function update($kd_kota){
+
+    }    
 }

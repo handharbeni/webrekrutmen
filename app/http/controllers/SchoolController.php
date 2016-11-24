@@ -28,7 +28,7 @@ class SchoolController extends Controller
     public function create($name){
     	$schools = School::firstOrNew(array('name' => $name));
     	$schools->save();
-        $return = School::where('name', $kota)->first();
+        $return = School::where('name', $name)->first();
         echo $return->id;
     }
     public function delete($kd_schools){
