@@ -68,7 +68,9 @@ class ProfileController extends Controller
 		
 		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
 	}
-	
+	public function cobaAge(){
+		echo date('Y') - '1993';
+	}
 	public function view($profileId){
 		
 	}
@@ -76,7 +78,7 @@ class ProfileController extends Controller
     public function store(Request $request){
 		$candidate	= Candidate::firstOrNew(array('user_id' => $request->input('user_id')));
 		
-		$candidatefields = array('name', 'alamat', 'email', 'phone', 'ktp', 'npwp',
+		$candidatefields = array('name', 'alamat', 'email', 'phone', 'KTP', 'npwp',
 											'tanggal_lahir', 'tempat_lahir_city_id', 'tempat_lahir_province_id',
 											'alamat', 'domisili_city_id', 'domisili_province_id', 'pendidikan',
 											'jurusan_id', 'tahun_lulus', 'tinggi_badan', 'berat_badan', 'gender', 'skills',
@@ -86,6 +88,8 @@ class ProfileController extends Controller
 			$candidate->$field =  $request->input($field);
 		}
 		$candidate->sekolah_id = $request->input('sekolah_id') == NULL ? 0 : $request->input('sekolah_id');
+		// var_dump(substr($request->input('tanggal_lahir'), 0, 4));
+		$candidate->age = date('Y') - substr($request->input('tanggal_lahir'), 0, 4);
 		
 		if($request->input('skills') == NULL)
 			$candidate->skills = implode(',',$request->input('skills'));

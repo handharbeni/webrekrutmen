@@ -33,6 +33,7 @@
 	Route::get('add/major/{major}', 'JurusanController@create');
 	
 	Route::get('profil', 'ProfileController@index');
+	Route::get('age', 'ProfileController@cobaAge');
 	Route::post('profil', 'ProfileController@store');
 	
 	Route::get('dashboard', 'DashboardController@index');
