@@ -31,10 +31,12 @@
 						</div>
 						<input type="submit" value="Login"> Belum memiliki akun? <a href="register">Daftar</a>
 					</form>
+					<p> <a href="company-register">Daftar Sebagai Perusahaan</a></p>
 				</div>
 				<div class="clearfix"></div>
 			</div>
 		</div>
+</div>
 @endsection
 </body>
 </html>

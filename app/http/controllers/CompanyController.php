@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Skill;
 use App\Level;
 use App\Company;
@@ -12,7 +13,9 @@ use App\Kota;
 use App\Kecamatan;
 use App\School;
 use App\Major;
+use App\Role;
 use App\Position;
+use App\User;
 
 class CompanyController extends Controller
 {
@@ -21,8 +24,10 @@ class CompanyController extends Controller
      *
      * @return void
      */
+	
     public function __construct()
     {
+		//
     }
 
     /**
@@ -35,16 +40,27 @@ class CompanyController extends Controller
 		$companies	= Company::all();
     	return view('company.index', compact('companies'));
     }
-    public function create($name){
-        $company = Company::firstOrNew(array('name' => $name));
-        $company->save();
-        $return = Company::where('name', $company)->first();
-        echo $return->id;        
+    public function register()
+    {
+    	return view('company.register');
     }
-    public function delete($kd_kota){
+    public function store(Request $request)
+    {
+		$data 		= Request::only('name', 'description', 'phone', 'email', 'contact_person');
+    	$newCompany = new Company($data);
+		$newCompany->save();
+		
+		//retrieving input
+		$loginData	= array(Request::input('email'), Hash::make(Request::input('password')));
+		
+		// get role with 'employer' name and push it to datafield
+		$role		= Role::where('name','=','employer')->first();
+		$roleData	= array('role_id', $role->id);
+		array_push($loginData, $roleData);
+		
+    	$newLogin	= new User($loginData);
+		$newLogin->save();
 
+		return redirect('login');
     }
-    public function update($kd_kota){
-
-    }    
 }

@@ -1,16 +1,17 @@
 <?php
-	/*
-	|--------------------------------------------------------------------------
-	| Web Routes
-	|--------------------------------------------------------------------------
-	|
-	| This file is where you may define all of the routes that are handled
-	| by your application. Just tell Laravel the URIs it should respond
-	| to using a Closure or controller method. Build something great!
-	|
-	*/
-	use App\User;
-	use Illuminate\Http\RedirectResponse;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| This file is where you may define all of the routes that are handled
+| by your application. Just tell Laravel the URIs it should respond
+| to using a Closure or controller method. Build something great!
+|
+*/
+use App\User;
+use Illuminate\Http\RedirectResponse;
 
 	Route::get('/', 'HomeController@index');
 	
@@ -18,19 +19,13 @@
 	
 	Route::get('job', 'JobController@index');
 	Route::get('job/company/{id}', ['as' => 'id', 'uses' => 'JobController@company']);
-
-	Route::get('job/search', ['as' => 'term', 'uses' => 'JobController@search']);	
 	Route::get('job/search', ['as' => 'term', 'uses' => 'JobController@search']);
+	
 	Route::get('perusahaan', 'CompanyController@index');
 	
 	Route::get('location/data/{type}/{id}', 'ProfileController@getData');
 	
-	Route::get('add/propinsi/{propinsi}', 'PropinsiController@create');
-	Route::get('add/kota/{kota}', 'KotaController@create');
-	Route::get('add/schools/{schools}', 'SchoolController@create');
-	Route::get('add/company/{company}', 'CompanyController@create');
-	Route::get('add/skills/{skills}', 'SkillsController@create');
-	Route::get('add/major/{major}', 'JurusanController@create');
+	Route::get('add/position/{position}', 'PositionController@create');
 	
 	Route::get('profil', 'ProfileController@index');
 	Route::post('profil', 'ProfileController@store');
@@ -44,5 +39,10 @@
 		return view('contact');
 	});
 	
-	
+	// route untuk perusahaan
+	Route::get('company-register', 'CompanyController@register');
+	Route::post('company-register', 'CompanyController@store');
 
+	Route::get('company-job', 'JobController@jobByCompany');
+	Route::get('job/create', 'JobController@create');
+	Route::post('job/create', 'JobController@store');

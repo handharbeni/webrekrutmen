@@ -63,12 +63,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<!--h2>Phone<span class="ph-numb">5696 593 980</span></h2-->&nbsp;
 					</div>
 					<div class="form-group">
-					<!--form action="#" method="post">
-					<input type="text" name="text" class="form-control" placeholder="Search">
-					<button type="submit" class="btn btn-default" aria-label="Left Align">
-						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					</button>
-					</form-->
 					@if (Auth::check())
 						Selamat datang, {{ Auth::user()->name }}!
 						<a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="label label-warning">
@@ -79,7 +73,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</a>
 
 					@else
-						<a href="company-register" class="label label-warning">Posting Lowongan</a> <a href="register" class="label label-warning">Daftar</a>&nbsp;<a href="login" class="label label-warning">Login</a>
+						<a href="register" class="label label-warning">Daftar</a>&nbsp;<a href="login" class="label label-warning">Login</a>
 					@endif
 					
 					</div>
@@ -99,18 +93,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						@if (Auth::check())
-							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url('dashboard') }}">Dashboard</a></li>
-							<li class="hvr-bounce-to-bottom {{ (Request::is('profil/*') || Request::is('profil')) ? 'active' : '' }}"><a href="{{ url('profil') }}">Profil</a></li>
-						@else
-							<li class="hvr-bounce-to-bottom {{ Request::is('/') ? 'active' : '' }} {{ Request::is('home') ? 'active' : '' }}"><a href="{{ url('home') }}">Beranda</a></li>
-						@endif
-						
-						<li class="hvr-bounce-to-bottom {{ (Request::is('job/*') || Request::is('job')) ? 'active' : '' }}"><a href="{{ url('job')}}">Lowongan Kerja</a></li>
-						<!-- <li class="hvr-bounce-to-bottom {{ Request::is('industri') ? 'active' : '' }}"><a href="industri">Industri</a></li> -->
-						<li class="hvr-bounce-to-bottom {{ (Request::is('perusahaan/*') || Request::is('perusahaan')) ? 'active' : '' }}"><a href="{{ url('perusahaan') }}">Perusahaan</a></li>
-						<!-- <li class="hvr-bounce-to-bottom {{ Request::is('training') ? 'active' : '' }}"><a href="training">Training</a></li> -->
-						<li class="hvr-bounce-to-bottom {{ Request::is('contact') ? 'active' : '' }}"><a href="{{ url('contact') }}">Kontak</a></li>
+							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url('company-dashboard') }}">Dashboard</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('job/*') || Request::is('company-job')) ? 'active' : '' }}"><a href="{{ url('company-job')}}">Lowongan Kerja</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('company-profile/*') || Request::is('company-profile')) ? 'active' : '' }}"><a href="{{ url('company-profile') }}">Profil Perusahaan</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('company-candidate/*') || Request::is('company-candidate')) ? 'active' : '' }}"><a href="{{ url('company-candidate') }}">Kandidat</a></li>
 					</ul>	
 					
 				</div>	
@@ -143,8 +129,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 @section('default-script')
 	<!-- start-smoth-scrolling -->
-	<script type="text/javascript" src="js/move-top.js"></script>
-    <script type="text/javascript" src="js/easing.js"></script>
+	<script type="text/javascript" src="{{ URL::asset('js/move-top.js')}}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/easing.js')}}"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function($) {
 			$(".scroll").click(function(event){		

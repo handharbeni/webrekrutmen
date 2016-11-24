@@ -4,26 +4,67 @@ namespace App\Http\Controllers;
 
 use App\JobOpening;
 use App\Company;
-use Illuminate\Http\Request;
+use App\Role;
+use App\MarriageStatus;
+use App\Religion;
+use App\Position;
+use App\Kota;
+use App\Skill;
+use Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
     public function index() {
+		
 		$jobs		= JobOpening::all();
-		//$companies		= Company::skip(0)->limit(10)->get();
 		$companies		= $this->topcompany();
-    	return view('job.index', compact('jobs','companies'));
+		
+		if(Auth::user()->role_id != NULL){
+			$user_role = Role::find(Auth::user()->role_id);
+			// if active login is perusahaan
+			if($user_role->name == "employer"){
+				return redirect('company-job');
+			}else{
+				return view('job.index', compact('jobs','companies'));
+			}
+		}else{
+			return view('job.index', compact('jobs','companies'));
+		}
+		
     }
 	
 	public function create()
 	{
-	  //
+	  	if(Auth::user()->role_id != NULL){
+			$user_role = Role::find(Auth::user()->role_id);
+			// if active login is perusahaan
+			if($user_role->name == "employer"){
+				$company_data	= Company::where('email',Auth::user()->email)->first();
+				$marriage_statuses = MarriageStatus::all();
+				$cities			= Kota::all();
+				$positions		= Position::all();
+				$skills			= Skill::all();
+				return view('job.create', compact('company_data','marriage_statuses','cities', 'positions','skills'));
+			}
+		}
+		return redirect('login');
+		
 	}
 	
-	public function store()
+	public function store(Request $request)
 	{
-	  //
+		$position = new Position();
+		$position->update();
+		
+		$data 		= Request::only('position_id', 'company_id', 'valid_until', 'number_of_openings', 'salary',
+									'age_min', 'age_max', 'domisili_city_id', 'gender', 'tinggi_badan', 'berat_badan',
+									'pendidikan', 'tahun_lulus', 'marriage_status_id', 'enabled', 'job_opening_status_id');
+    	$newJob = new JobOpening($data);
+		$newJob->save();
+		
+		return redirect('/company-job');
 	}
 		
 	public function edit($id)
@@ -41,7 +82,15 @@ class JobController extends Controller
 	  //
 	}
 	
-<<<<<<< HEAD
+	public function jobByCompany(){
+		// find company id
+		$company_data	= Company::where('email',Auth::user()->email)->first();
+		if(!$company_data == NULL) {
+			$jobs			= JobOpening::where('company_id', $company_data->id)
+								->orderBy('valid_until', 'desc')->get();
+		}			
+		return view('job.company', compact('jobs', 'company_data'));
+	}
 	public function search(Request $request){
 		$keyword	= $request->input('keyword');
 		$filter		= $request->input('filter-hari');
@@ -65,14 +114,6 @@ class JobController extends Controller
 		//$companies		= Company::skip(0)->limit(10)->get();
 		$companies		= $this->topcompany();
     	return view('job.index', compact('jobs','companies', 'company_data'));
-=======
-    public function company($id)
-    {
-        $jobs		= JobOpening::where('company_id', $id)
-					  ->orderBy('valid_until', 'desc')->get();
-		$companies	= Company::skip(0)->limit(10)->get();
-    	return view('job.index', compact('jobs','companies'));
->>>>>>> origin/master
     }
 
 	public function topcompany(){
