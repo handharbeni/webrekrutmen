@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use App\JobOpening;
 use App\Company;
-use App\Role;
-use App\MarriageStatus;
-use App\Religion;
-use App\Position;
-use App\Kota;
+use App\Candidate;
+use App\CandidateHistory;
 use App\Skill;
+use App\Level;
+use App\Religion;
+use App\MarriageStatus;
+use App\City;
+use App\Propinsi;
+use App\Kota;
+use App\Kecamatan;
+use App\School;
+use App\Major;
+use App\Position;
+
 use Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -19,20 +27,19 @@ class JobController extends Controller
     public function index() {
 		
 		$jobs		= JobOpening::all();
-		$companies		= $this->topcompany();
-		
-		if(Auth::user()->role_id != NULL){
-			$user_role = Role::find(Auth::user()->role_id);
-			// if active login is perusahaan
-			if($user_role->name == "employer"){
-				return redirect('company-job');
-			}else{
-				return view('job.index', compact('jobs','companies'));
+		$companies	= $this->topcompany();
+		if (Auth::check()){
+			if(Auth::user()->role_id != NULL){
+				$user_role = Role::find(Auth::user()->role_id);
+				// if active login is perusahaan
+				if($user_role->name == "employer"){
+					return redirect('company-job');
+				}else{
+					return view('job.index', compact('jobs','companies'));
+				}
 			}
-		}else{
-			return view('job.index', compact('jobs','companies'));
 		}
-		
+			return view('job.index', compact('jobs','companies'));		
     }
 	
 	public function create()
@@ -80,6 +87,25 @@ class JobController extends Controller
 	public function destroy($id)
 	{
 	  //
+	}
+	
+	public function apply($id){
+		$jobs		= JobOpening::find($id)->first();
+		$skills		= Skill::all();
+		$levels		= Level::all();
+		$statuses	= MarriageStatus::all();
+		$religions	= Religion::all();
+		$schools	= School::all();
+		$companies	= Company::all();
+		$majors		= Major::all();
+		$positions	= Position::all();
+		$propinsi	= Propinsi::all();
+		$kota		= Kota::all();
+		
+		if(Auth::check())
+			$profil	= Candidate::find(Auth::user()->id)->first();
+		
+		return view('job.apply',compact('jobs', 'skills', 'levels', 'statuses', 'religions', 'schools', 'companies','majors', 'positions', 'propinsi', 'kota', 'profil'));
 	}
 	
 	public function jobByCompany(){

@@ -19,11 +19,8 @@
 						<p class="job-desc"><strong>Phone : </strong>{{$company->phone}}</p>
 					</div>
 					<div class="clearfix"></div>
-<<<<<<< HEAD
+
 					<a href="{{ url('job/company/'.$company->id)}}" class="btn btn-default">Job Listing</a>
-=======
-					<a href="job/company/{{$company->id}}" class="btn btn-default">Job Listing</a>
->>>>>>> origin/master
 				</div>
 				<div class="clearfix"></div>
 				<hr/>

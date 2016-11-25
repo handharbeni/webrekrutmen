@@ -37,9 +37,19 @@ class CompanyController extends Controller
      */
     public function index()
     {
-		$companies	= Company::all();
+		$companies	= Company::orderBy('name','ASC')->get();
     	return view('company.index', compact('companies'));
     }
+	
+    public function view()
+    {
+		if(!Auth::check())
+			return redirect('login');
+		
+		$company_data	= Company::where('email',Auth::user()->email)->first();
+    	return view('company.profil', compact('company_data'));
+    }
+	
     public function register()
     {
     	return view('company.register');
@@ -47,20 +57,14 @@ class CompanyController extends Controller
     public function store(Request $request)
     {
 		$data 		= Request::only('name', 'description', 'phone', 'email', 'contact_person');
+		
+		// get role with 'employer' name and push it to datafield
+    	$newLogin	= new User;
+		$newLogin->store();
+		
     	$newCompany = new Company($data);
 		$newCompany->save();
 		
-		//retrieving input
-		$loginData	= array(Request::input('email'), Hash::make(Request::input('password')));
-		
-		// get role with 'employer' name and push it to datafield
-		$role		= Role::where('name','=','employer')->first();
-		$roleData	= array('role_id', $role->id);
-		array_push($loginData, $roleData);
-		
-    	$newLogin	= new User($loginData);
-		$newLogin->save();
-
 		return redirect('login');
     }
 }
