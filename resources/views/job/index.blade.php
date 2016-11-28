@@ -32,7 +32,7 @@
 							<p class="job-desc"><strong>Berat : </strong>{{ ($job->berat_badan > 0) ? $job->berat_badan." kg" : "-"}}</p>
 						</div>
 						<div class="clearfix"></div>
-						<a href="#" class="btn btn-default">Kirim Lamaran</a>
+						<a href="{{ url('job/apply/'.$job->id)}}" class="btn btn-default">Kirim Lamaran</a>
 					</div>
 					<div class="clearfix"></div>
 					<hr/>

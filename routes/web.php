@@ -29,8 +29,9 @@ use Illuminate\Http\RedirectResponse;
 	Route::get('add/position/{position}', 'PositionController@create');
 	
 	Route::get('profil', 'ProfileController@index');
-	Route::get('age', 'ProfileController@cobaAge');
 	Route::post('profil', 'ProfileController@store');
+	
+	Route::get('applicant/{id}', 'ApplicantController@view');
 	
 	Route::get('dashboard', 'DashboardController@index');
 	
@@ -46,7 +47,9 @@ use Illuminate\Http\RedirectResponse;
 	Route::post('company-register', 'CompanyController@store');
 
 	Route::get('company-job', 'JobController@jobByCompany');
+	Route::get('company-profile', 'CompanyController@view');
 	Route::post('company-profile', 'CompanyController@update');
+	
 	Route::get('company-applicant', 'ApplicantController@applicantByCompany');
 	
 	Route::get('job/create', 'JobController@create');
