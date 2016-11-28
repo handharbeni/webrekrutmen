@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 	Route::get('/home', 'HomeController@index');
 	
 	Route::get('job', 'JobController@index');
+	Route::get('job/apply/{id}', 'JobController@apply');
 	Route::get('job/company/{id}', ['as' => 'id', 'uses' => 'JobController@company']);
 	Route::get('job/search', ['as' => 'term', 'uses' => 'JobController@search']);
 	
@@ -45,5 +46,8 @@ use Illuminate\Http\RedirectResponse;
 	Route::post('company-register', 'CompanyController@store');
 
 	Route::get('company-job', 'JobController@jobByCompany');
+	Route::post('company-profile', 'CompanyController@update');
+	Route::get('company-applicant', 'ApplicantController@applicantByCompany');
+	
 	Route::get('job/create', 'JobController@create');
 	Route::post('job/create', 'JobController@store');

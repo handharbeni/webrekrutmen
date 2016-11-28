@@ -14,6 +14,7 @@ use App\City;
 use App\Propinsi;
 use App\Kota;
 use App\Kecamatan;
+use App\Role;
 use App\School;
 use App\Major;
 use App\Position;

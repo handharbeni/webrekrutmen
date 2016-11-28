@@ -93,10 +93,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url('company-dashboard') }}">Dashboard</a></li>
+							<li class="hvr-bounce-to-bottom {{ Request::is('dashboard') ? 'active' : '' }}"><a href="{{ url('dashboard') }}">Dashboard</a></li>
 						<li class="hvr-bounce-to-bottom {{ (Request::is('job/*') || Request::is('company-job')) ? 'active' : '' }}"><a href="{{ url('company-job')}}">Lowongan Kerja</a></li>
 						<li class="hvr-bounce-to-bottom {{ (Request::is('company-profile/*') || Request::is('company-profile')) ? 'active' : '' }}"><a href="{{ url('company-profile') }}">Profil Perusahaan</a></li>
-						<li class="hvr-bounce-to-bottom {{ (Request::is('company-candidate/*') || Request::is('company-candidate')) ? 'active' : '' }}"><a href="{{ url('company-candidate') }}">Kandidat</a></li>
+						<li class="hvr-bounce-to-bottom {{ (Request::is('company-applicant/*') || Request::is('company-applicant')) ? 'active' : '' }}"><a href="{{ url('company-applicant') }}">Pelamar</a></li>
 					</ul>	
 					
 				</div>	

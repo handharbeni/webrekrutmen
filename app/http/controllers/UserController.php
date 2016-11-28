@@ -20,20 +20,5 @@ class UserController extends Controller
         return view('register');
     }
 	
-    public function store(Request $request)
-    {    
-		
-		$daftar = new User;
-		$daftar->name	= $request->input('nama');
-		$daftar->email	= $request->input('email');
-		$daftar->password	= md5($request->input('password'));
-		
-		if ($daftar->save())
-		{
-		  return redirect('login')->with('status', 'Register berhasil! Silakan login!');;
-		}else{
-		  return redirect('register')->with('status', 'Register gagal!');;
-		}
-    }
 }
 ?>

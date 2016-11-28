@@ -13,6 +13,7 @@ use App\Religion;
 use App\MarriageStatus;
 use App\City;
 use App\Company;
+use App\Role;
 use App\Propinsi;
 use App\Kota;
 use App\Kecamatan;
@@ -39,6 +40,11 @@ class ProfileController extends Controller
      */
     public function index()
     {
+		$user_role = Role::find(Auth::user()->role_id);
+		if($user_role->name == "employer"){
+			return redirect('company-job');
+		}
+		
         $propinsi	= Propinsi::all();
 		$skills		= Skill::all();
 		$levels		= Level::all();
@@ -50,9 +56,8 @@ class ProfileController extends Controller
 		$positions	= Position::all();
 		$profil		= DB::table('candidates')->where('user_id',Auth::user()->id)->first();
 		$history	= DB::table('candidate_histories')->where('candidate_id',Auth::user()->id)->first();
-		
 		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
-    }
+    } 
 	public function update(){
 		$propinsi	= Propinsi::all();
 		$skills		= Skill::all();
@@ -68,17 +73,15 @@ class ProfileController extends Controller
 		
 		return view('profil.index', compact('skills','levels','propinsi','statuses','religions','schools','companies','majors','profil', 'history','positions'));
 	}
-	public function cobaAge(){
-		echo date('Y') - '1993';
-	}
-	public function view($profileId){
+	
+	public function view($profileeId){
 		
 	}
 	
     public function store(Request $request){
 		$candidate	= Candidate::firstOrNew(array('user_id' => $request->input('user_id')));
 		
-		$candidatefields = array('name', 'alamat', 'email', 'phone', 'KTP', 'npwp',
+		$candidatefields = array('name', 'alamat', 'email', 'phone', 'KTP', 'NPWP',
 											'tanggal_lahir', 'tempat_lahir_city_id', 'tempat_lahir_province_id',
 											'alamat', 'domisili_city_id', 'domisili_province_id', 'pendidikan',
 											'jurusan_id', 'tahun_lulus', 'tinggi_badan', 'berat_badan', 'gender', 'skills',
@@ -87,9 +90,9 @@ class ProfileController extends Controller
 		foreach($candidatefields as $field){
 			$candidate->$field =  $request->input($field);
 		}
-		$candidate->sekolah_id = $request->input('sekolah_id') == NULL ? 0 : $request->input('sekolah_id');
-		// var_dump(substr($request->input('tanggal_lahir'), 0, 4));
-		$candidate->age = date('Y') - substr($request->input('tanggal_lahir'), 0, 4);
+		
+		$candidate->age			= date('Y') - substr($request->input('tanggal_lahir'), 0, 4);
+		$candidate->sekolah_id	= $request->input('sekolah_id') == NULL ? 0 : $request->input('sekolah_id');
 		
 		if($request->input('skills') == NULL)
 			$candidate->skills = implode(',',$request->input('skills'));

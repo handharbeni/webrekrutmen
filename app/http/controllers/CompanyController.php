@@ -50,11 +50,30 @@ class CompanyController extends Controller
     	return view('company.profil', compact('company_data'));
     }
 	
+    public function update()
+    {
+		if(!Auth::check())
+			return redirect('login');
+		
+		$company	= Company::find(Request::input('id'));
+		
+		$company->name			= Request::input('name');
+		$company->description	= Request::input('description');
+		$company->contact_person	= Request::input('contact_person');
+		$company->email		= Request::input('email');
+		$company->phone		= Request::input('phone');
+		
+		$company->save();
+		
+		return redirect('company-profile')->with('status', 'Profil Perusahaan Diupdate!');
+    }
+	
     public function register()
     {
     	return view('company.register');
     }
-    public function store(Request $request)
+	
+    public function store()
     {
 		$data 		= Request::only('name', 'description', 'phone', 'email', 'contact_person');
 		

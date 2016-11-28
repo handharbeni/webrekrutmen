@@ -9,7 +9,7 @@
 					<h4>Top 10 Company</h4>	
 					<div class="list-group">						
 					@foreach ($companies as $company)
-					  <button type="button" class="list-group-item"><a href="{{ url('job/company/'.$company->id)}}">{{$company->name}}</a></button>
+					  <button type="button" class="list-group-item"><a href="{{ url('job/company/'.$company->company_id)}}">{{$company->name}}</a></button>
 					@endforeach
 					</div>
 				</div>
